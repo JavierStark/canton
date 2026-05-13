@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  sequencer1:
+    build: ../../../docker/canton/images/canton-sequencer
+    container_name: sequencer1
+    ports:
+      - "5001:5001"
+      - "5002:5002"
+    volumes:
+      - ./configs/sequencer1.conf:/app/additional-config.conf:ro
+    environment:
+      - LOG_LEVEL_STDOUT=INFO
+
+  mediator1:
+    build: ../../../docker/canton/images/canton-mediator
+    container_name: mediator1
+    ports:
+      - "5202:5202"
+    volumes:
+      - ./configs/mediator1.conf:/app/additional-config.conf:ro
+    environment:
+      - LOG_LEVEL_STDOUT=INFO
+
+  participant1:
+    build: ../../../docker/canton/images/canton-participant
+    container_name: participant1
+    ports:
+      - "5011:5011"
+      - "5012:5012"
+      - "5013:5013"
+    volumes:
+      - ./configs/participant1.conf:/app/additional-config.conf:ro
+    environment:
+      - LOG_LEVEL_STDOUT=INFO
+
+  participant2:
+    build: ../../../docker/canton/images/canton-participant
+    container_name: participant2
+    ports:
+      - "5021:5021"
+      - "5022:5022"
+      - "5023:5023"
+    volumes:
+      - ./configs/participant2.conf:/app/additional-config.conf:ro
+    environment:
+      - LOG_LEVEL_STDOUT=INFO
